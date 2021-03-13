@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <title>Am I on A Boat?</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <button id="btn">Click Me!</button>
+        <div>Are you on a boat?</div>
+        <div id="boat"></div>
+        <iframe id="hoes"></iframe>
+      </div>
+    </div>
+  </body>
+  <script>
+    $("#btn").on("click", () => {
+      const settings = {
+        async: true,
+        crossDomain: true,
+        url: "https://ip-geo-location.p.rapidapi.com/ip/check?format=json",
+        method: "GET",
+        headers: {
+          "x-rapidapi-key":
+            "969ddf4f94mshe5029138db7e4f1p139c31jsnb2b9317182ce",
+          "x-rapidapi-host": "ip-geo-location.p.rapidapi.com",
+        },
+      };
+      const settings2 = {
+        async: true,
+        crossDomain: true,
+        url:
+          "https://api.onwater.io/api/v1/results/[latitude],[longitude]?access_token=[your_token]",
+        method: "GET",
+        headers: {},
+      };
+
+      $.ajax(settings).then(function (response) {
+        let land = document.querySelector("#boat");
+        let boat = document.querySelector("#hoes");
+        let hoes = response.location.latitude;
+        let ho = response.location.longitude;
+
+        // land.innerHTML = hoes;
+        // land.innerHTML += ho;
+        // console.log(response);
+
+        $.ajax({
+          url:
+            "https://api.onwater.io/api/v1/results/" +
+            hoes +
+            "," +
+            ho +
+            "?access_token=ttPKUDur5XjwqTdv5gYm",
+          type: "GET",
+          dataType: "json",
+          success: function (data) {
+            console.log(data.water);
+
+            if (data.water === true) {
+              $(
+                (width = "560"),
+                (height = "315"),
+                (src = "https://www.youtube.com/embed/avaSdC0QOUM"),
+                (frameborder = "0"),
+                (allow =
+                  "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"),
+                allowfullscreen
+              ).appendTo("#hoes");
+            } else land.innerHTML = "You are not on a boat!";
+          },
+        });
+      });
+    });
+  </script>
+</html>
