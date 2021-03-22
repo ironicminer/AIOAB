@@ -62,17 +62,18 @@
           type: "GET",
           dataType: "json",
           success: function (data) {
-            console.log(data.water);
+            console.log(data.water)
             
             $("#hoes").append(function(){
               if (data.water === true){
                 
-                $("#hoes").append('<iframe width="560" height="315" src="https://www.youtube.com/embed/avaSdC0QOUM?start=26&autoplay=1"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')}
-
-            })
+                $("#hoes").append('<iframe width="560" height="315" src="https://www.youtube.com/embed/avaSdC0QOUM?start=26&autoplay=1"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')}else $("#hoes").append('You are not on a boat');
+                
+            },
               
-          
+            );
           },
+
         });
 
         
