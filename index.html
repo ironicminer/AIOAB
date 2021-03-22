@@ -13,11 +13,14 @@
         <button id="btn">Click Me!</button>
         <div>Are you on a boat?</div>
         <div id="boat"></div>
-        <iframe id="hoes"></iframe>
+        <div id="hoes"></div>
       </div>
     </div>
   </body>
   <script>
+    
+    
+
     $("#btn").on("click", () => {
       const settings = {
         async: true,
@@ -39,7 +42,7 @@
         headers: {},
       };
 
-      $.ajax(settings).then(function (response) {
+       $.ajax(settings).then(function (response) {
         let land = document.querySelector("#boat");
         let boat = document.querySelector("#hoes");
         let hoes = response.location.latitude;
@@ -60,21 +63,21 @@
           dataType: "json",
           success: function (data) {
             console.log(data.water);
+            
+            $("#hoes").append(function(){
+              if (data.water === true){
+                
+                $("#hoes").append('<iframe width="560" height="315" src="https://www.youtube.com/embed/avaSdC0QOUM?start=26&autoplay=1"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')}
 
-            if (data.water === true) {
-              $(
-                (width = "560"),
-                (height = "315"),
-                (src = "https://www.youtube.com/embed/avaSdC0QOUM"),
-                (frameborder = "0"),
-                (allow =
-                  "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"),
-                allowfullscreen
-              ).appendTo("#hoes");
-            } else land.innerHTML = "You are not on a boat!";
+            })
+              
+          
           },
         });
-      });
+
+        
+        });
     });
+        
   </script>
 </html>
